@@ -1,0 +1,58 @@
+name: Drift
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Weekly on Monday at 06:00 UTC
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "operations.graphql"
+      - "schema/**"
+      - "scripts/check.py"
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - branch: master
+            image_tag: master-latest-lightnet
+          - branch: compatible
+            image_tag: compatible-latest-lightnet
+          - branch: develop
+            image_tag: develop-latest-lightnet
+
+    name: "Drift: ${{ matrix.branch }}"
+
+    services:
+      mina:
+        image: o1labs/mina-local-network:${{ matrix.image_tag }}
+        env:
+          NETWORK_TYPE: single-node
+          PROOF_LEVEL: none
+          LOG_LEVEL: Info
+          RUN_ARCHIVE_NODE: false
+        ports:
+          - 8080:8080
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install graphql-core
+
+      - name: Wait for Mina network
+        uses: o1-labs/wait-for-mina-network-action@v1
+        with:
+          mina-graphql-port: "8080"
+          max-attempts: "60"
+          polling-interval-ms: "10000"
+
+      # An operation that is not valid against the live schema fails the job;
+      # a schema difference is only a warning.
+      - name: Validate the operations against the live daemon
+        run: python scripts/check.py --endpoint http://127.0.0.1:8080/graphql
