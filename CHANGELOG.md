@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.1] - 2026-10-01
+
+### Changed
+- `SPEC.md` and `ITN.md` have a Python column; `SPEC.md` names Python's
+  custom-query method (`execute_query`) and its `from_` field. The Python SDK
+  has no ITN client yet.
+- `ITN.md` links to `schema/itn.graphql` with an absolute URL, so that the
+  link works in the SDKs' copies, which do not include `schema/`.
+
+The operations are the same as in 0.1.0.
+
 ## [0.1.0] - 2026-09-30
 
 ### Added

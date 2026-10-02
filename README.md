@@ -14,7 +14,9 @@ The API that the Mina SDKs have in common, independent of language:
 SDKs that follow this specification:
 [mina-sdk-rust](https://github.com/o1-labs/mina-sdk-rust),
 [mina-sdk-go](https://github.com/o1-labs/mina-sdk-go),
-[mina-sdk-js](https://github.com/o1-labs/mina-sdk-js).
+[mina-sdk-js](https://github.com/o1-labs/mina-sdk-js),
+[mina-sdk-python](https://github.com/o1-labs/mina-sdk-python) (the daemon
+client; not yet the ITN client).
 
 ## How an SDK uses it
 
@@ -29,7 +31,8 @@ the copy in `spec/VERSION`:
   is different from the tag.
 
 The copy keeps each SDK self-contained: a normal clone builds and tests, and
-the packages on crates.io, the Go module proxy and npm are not affected.
+the packages on crates.io, the Go module proxy, npm and PyPI are not
+affected.
 
 To update an SDK to a new release:
 
