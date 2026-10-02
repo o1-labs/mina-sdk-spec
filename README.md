@@ -15,8 +15,7 @@ SDKs that follow this specification:
 [mina-sdk-rust](https://github.com/o1-labs/mina-sdk-rust),
 [mina-sdk-go](https://github.com/o1-labs/mina-sdk-go),
 [mina-sdk-js](https://github.com/o1-labs/mina-sdk-js),
-[mina-sdk-python](https://github.com/o1-labs/mina-sdk-python) (the daemon
-client; not yet the ITN client).
+[mina-sdk-python](https://github.com/o1-labs/mina-sdk-python).
 
 ## How an SDK uses it
 
