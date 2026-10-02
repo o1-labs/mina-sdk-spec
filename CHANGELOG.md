@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.2] - 2026-10-02
+
+### Changed
+- `ITN.md` has the Python ITN names (`mina_sdk.itn`, extra `mina-sdk[itn]`):
+  all four SDKs implement the ITN client.
+
+The operations are the same as in 0.1.0.
+
 ## [0.1.1] - 2026-10-01
 
 ### Changed
