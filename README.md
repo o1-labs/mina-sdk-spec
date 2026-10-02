@@ -70,7 +70,9 @@ spec:
   with `schema/daemon.graphql`. `--strict` also fails on a schema difference,
   and `--write-schema` replaces the snapshot. The drift workflow runs it
   every week against the lightnet images of `master`, `compatible` and
-  `develop`.
+  `develop`. Each scheduled run also enables the workflow again through the
+  API, because GitHub disables a scheduled workflow after 60 days without
+  activity in the repository.
 
 The ITN server needs signed requests, so the ITN schema is not read live in
 CI. To refresh `schema/itn.graphql`, send a full introspection query with an
