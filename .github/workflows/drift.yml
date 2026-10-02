@@ -11,6 +11,20 @@ on:
       - "scripts/check.py"
 
 jobs:
+  # GitHub disables a scheduled workflow after 60 days without activity in
+  # the repository. Enabling the workflow through the API on each scheduled
+  # run resets that timer, so the weekly drift check keeps running.
+  keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Keep the schedule enabled
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/drift.yml/enable"
+
   drift:
     runs-on: ubuntu-latest
     timeout-minutes: 20
