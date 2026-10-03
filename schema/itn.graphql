@@ -39,6 +39,41 @@ input GatingUpdate {
   trustedPeers: [NetworkPeer!]!
 }
 
+"""Fee payer and amounts for creating and funding new accounts"""
+input CreateAccountsDetails {
+  """
+  Amount divided among the new accounts (each account also pays the account creation fee out of its share)
+  """
+  amount: CurrencyAmount!
+
+  """Fee of each zkApp command that creates accounts"""
+  fee: Fee!
+
+  """Number of new accounts"""
+  numAccounts: Int!
+
+  """Private key of the account that funds the new accounts"""
+  feePayer: PrivateKey!
+}
+
+type ItnCreatedAccount {
+  """Public key of the new account"""
+  publicKey: PublicKey!
+
+  """Private key of the new account, in base58"""
+  privateKey: String!
+}
+
+type ItnCreatedAccounts {
+  """
+  Handle of the background job that funds the accounts; it is listed by scheduledTransactions until the job ends
+  """
+  handle: String!
+
+  """The new accounts, funded by the background job"""
+  accounts: [ItnCreatedAccount!]!
+}
+
 """Keys and other information for scheduling zkapp commands"""
 input ZkappCommandsDetails {
   """
@@ -145,13 +180,36 @@ input PaymentsDetails {
 
 type mutation {
   schedulePayments(
+    """
+    Handle (a UUID) for the scheduler; a random one when omitted. A request with the handle of a running scheduler starts nothing and returns that handle
+    """
+    handle: String
+
     """Payments details"""
     input: PaymentsDetails!
   ): String!
   scheduleZkappCommands(
+    """
+    Handle (a UUID) for the scheduler; a random one when omitted. A request with the handle of a running scheduler starts nothing and returns that handle
+    """
+    handle: String
+
     """Zkapp commands details"""
     input: ZkappCommandsDetails!
   ): String!
+
+  """
+  Create and fund new accounts with zkApp commands from a fee payer. The keys are returned at once; the funding runs in the background under the returned handle (listed by scheduledTransactions until it ends), in batches that each wait for their accounts to appear in the best tip ledger. A request with the handle of a running job returns that job's accounts again.
+  """
+  createAccounts(
+    """
+    Handle (a UUID) for the scheduler; a random one when omitted. A request with the handle of a running scheduler starts nothing and returns that handle
+    """
+    handle: String
+
+    """Fee payer and amounts"""
+    input: CreateAccountsDetails!
+  ): ItnCreatedAccounts!
   stopScheduledTransactions(
     """Transaction scheduler handle"""
     handle: String!
@@ -229,6 +287,11 @@ type ItnAuth {
 
   """Is the node a block producer"""
   isBlockProducer: Boolean!
+
+  """
+  Git commit of the daemon build, so that a client can check that it was built for this daemon
+  """
+  commitId: String!
 }
 
 type query {
@@ -243,4 +306,9 @@ type query {
     """Least log ID to start with"""
     startLogId: Int!
   ): [ItnLog!]!
+
+  """
+  Handles of the running schedulers: scheduled payments, scheduled zkApp commands and account creation
+  """
+  scheduledTransactions: [String!]!
 }
