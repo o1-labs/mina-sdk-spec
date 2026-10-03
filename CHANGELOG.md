@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0] - unreleased
+
+### Added
+- Five ITN operations for harnesses, which need a daemon with
+  MinaProtocol/mina#19616: `CommitId`, `ScheduledTransactions`,
+  `SchedulePaymentsWithHandle`, `ScheduleZkappCommandsWithHandle` and
+  `CreateAccounts`. `ITN.md` describes them.
+
+### Changed
+- `schema/itn.graphql` is read from a daemon with MinaProtocol/mina#19616.
+
+The existing operations do not change.
+
 ## [0.1.2] - 2026-10-02
 
 ### Changed

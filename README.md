@@ -7,7 +7,7 @@ The API that the Mina SDKs have in common, independent of language:
 | [`SPEC.md`](SPEC.md) | Methods, rules and result types of the daemon client (GraphQL port 3085) |
 | [`operations.graphql`](operations.graphql) | The 22 GraphQL documents of the daemon client |
 | [`ITN.md`](ITN.md) | Methods and authentication protocol of the ITN client (`--itn-graphql-port`) |
-| [`itn-operations.graphql`](itn-operations.graphql) | The 10 GraphQL documents of the ITN client |
+| [`itn-operations.graphql`](itn-operations.graphql) | The 15 GraphQL documents of the ITN client |
 | [`schema/daemon.graphql`](schema/daemon.graphql) | The daemon's public schema, as SDL |
 | [`schema/itn.graphql`](schema/itn.graphql) | The daemon's ITN schema, as SDL |
 
