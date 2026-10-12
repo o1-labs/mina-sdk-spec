@@ -1,6 +1,11 @@
 # Changelog
 
-## [0.2.0] - unreleased
+## [0.4.0-rc.1] - 2026-10-12
+
+From this release on, the specification and the four SDKs have the same
+version number: SDK x.y.z implements mina-sdk-spec x.y.z. The number jumps
+from 0.2.0 to 0.4.0 because mina-sdk-go and mina-sdk-js are already at 0.3.0.
+The pre-release tag v0.2.0-rc.1 has the same operations as this one.
 
 ### Added
 - Five ITN operations for harnesses, which need a daemon with

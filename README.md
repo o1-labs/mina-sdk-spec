@@ -19,6 +19,10 @@ SDKs that follow this specification:
 
 ## How an SDK uses it
 
+The specification and the SDKs have the same version number: SDK x.y.z
+implements mina-sdk-spec x.y.z (a pre-release such as 0.4.0-rc.1 implements
+the pre-release tag of the same name).
+
 Each SDK has a copy of `SPEC.md`, `ITN.md`, `operations.graphql` and
 `itn-operations.graphql` in its `spec/` directory, and the release tag of
 the copy in `spec/VERSION`:
@@ -36,7 +40,7 @@ affected.
 To update an SDK to a new release:
 
 ```bash
-git -C mina-sdk-spec checkout v0.2.0
+git -C mina-sdk-spec checkout v0.4.0-rc.1
 mina-sdk-spec/scripts/sync.sh path/to/mina-sdk-go
 # then change the SDK so that its conformance test passes
 ```
