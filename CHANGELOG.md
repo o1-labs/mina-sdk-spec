@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.4.0-rc.2] - unreleased
+
+### Added
+- `BestChain`, `GenesisBlock` and `Block` select the block's zkApp commands
+  (`transactions.zkappCommands`, with the full account updates) and its
+  completed SNARK jobs (`snarkJobs`): `BlockInfo` gets `zkappCommands` (list
+  of `BlockZkappCommand`) and `snarkJobs` (list of `CompletedWork`).
+- `DaemonStatus` selects `globalSlotSinceGenesisBestTip`, `consensusTimeNow`
+  and `addrsAndPorts.peer`.
+- `PooledUserCommands` selects `validUntil`, `token` and `feeToken`.
+
+These are the fields that mina-frontend reads with hand-written queries; with
+them it can use the SDK for every daemon call. The ITN operations do not
+change.
+
 ## [0.4.0-rc.1] - 2026-10-12
 
 From this release on, the specification and the four SDKs have the same
