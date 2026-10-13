@@ -10,6 +10,8 @@
 - `DaemonStatus` selects `globalSlotSinceGenesisBestTip`, `consensusTimeNow`
   and `addrsAndPorts.peer`.
 - `PooledUserCommands` selects `validUntil`, `token` and `feeToken`.
+- `SendPayment` and `SendDelegation` take an optional `validUntil`, so that a
+  command signed with one can be sent as signed.
 
 These are the fields that mina-frontend reads with hand-written queries; with
 them it can use the SDK for every daemon call. The ITN operations do not
