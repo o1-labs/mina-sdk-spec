@@ -40,7 +40,7 @@ affected.
 To update an SDK to a new release:
 
 ```bash
-git -C mina-sdk-spec checkout v0.4.0-rc.1
+git -C mina-sdk-spec checkout v0.4.0-rc.2
 mina-sdk-spec/scripts/sync.sh path/to/mina-sdk-go
 # then change the SDK so that its conformance test passes
 ```
