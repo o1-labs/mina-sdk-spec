@@ -1,6 +1,25 @@
 # Changelog
 
-## [0.4.0-rc.2] - unreleased
+## [0.4.0-rc.3] - unreleased
+
+### Added
+- `BootstrapStatus`: what a node that is not yet synced is doing. Its
+  bootstrap phase and when it began, the number of attempts and why the last
+  one failed, and the progress of each ledger sync. Tells a stalled ledger
+  sync from a slow one. Needs daemon 4.0.4.
+- `TransactionPoolStatus`: how full the daemon's transaction pool is and the
+  fee per weight unit a new command must beat once it is full. Cheap enough
+  to poll before each submission. Needs daemon 4.0.4.
+
+### Changed
+- `schema/daemon.graphql` is the schema of the mina 4.0.4 release. Against
+  the 4.0.0 snapshot it adds the two queries above, the `scanState` query
+  and the `archiveVersionedPrecomputedBlock` mutation, and nothing else. The
+  last two are outside this API (see `SPEC.md`).
+
+The existing operations do not change.
+
+## [0.4.0-rc.2] - 2026-10-13
 
 ### Added
 - `BestChain`, `GenesisBlock` and `Block` select the block's zkApp commands
