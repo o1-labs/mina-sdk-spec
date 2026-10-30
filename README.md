@@ -5,7 +5,7 @@ The API that the Mina SDKs have in common, independent of language:
 | File | Contents |
 |:--|:--|
 | [`SPEC.md`](SPEC.md) | Methods, rules and result types of the daemon client (GraphQL port 3085) |
-| [`operations.graphql`](operations.graphql) | The 22 GraphQL documents of the daemon client |
+| [`operations.graphql`](operations.graphql) | The 24 GraphQL documents of the daemon client |
 | [`ITN.md`](ITN.md) | Methods and authentication protocol of the ITN client (`--itn-graphql-port`) |
 | [`itn-operations.graphql`](itn-operations.graphql) | The 15 GraphQL documents of the ITN client |
 | [`schema/daemon.graphql`](schema/daemon.graphql) | The daemon's public schema, as SDL |
@@ -82,7 +82,7 @@ The ITN server needs signed requests, so the ITN schema is not read live in
 CI. To refresh `schema/itn.graphql`, send a full introspection query with an
 SDK's ITN client (custom-query method) and print the result as SDL.
 
-The snapshots were read from daemon `4.0.0-6965b50` (devnet build).
+`schema/daemon.graphql` is the schema of the mina 4.0.4 release, from `graphql_schema.json` at that tag in MinaProtocol/mina. `schema/itn.graphql` was read from daemon `4.0.0-6965b50` (devnet build).
 
 ## Changing the specification
 
